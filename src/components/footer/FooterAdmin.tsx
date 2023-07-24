@@ -20,9 +20,9 @@ export default function Footer() {
         xl: 'row',
       }}
       alignItems="center"
-      justifyContent="space-between"
-      px={{ base: '30px', md: '50px' }}
-      pb="30px"
+      justifyContent="center"
+      //   px={{ base: '30px', md: '50px' }}
+      mb="30px"
     >
       <Text
         color={textColor}
@@ -35,12 +35,11 @@ export default function Footer() {
         mb={{ base: '10px', xl: '0px' }}
       >
         {' '}
-        &copy; {new Date().getFullYear()}
         <Text as="span" fontWeight="500" ms="4px">
-          Horizon UI AI Template. All Rights Reserved.
+          Made with love in Hanoi - {new Date().getFullYear()}
         </Text>
       </Text>
-      <List display="flex">
+      {/* <List display="flex">
         <ListItem
           me={{
             base: '10px',
@@ -96,7 +95,7 @@ export default function Footer() {
             Privacy Policy
           </Link>
         </ListItem>
-      </List>
+      </List> */}
     </Flex>
   );
 }

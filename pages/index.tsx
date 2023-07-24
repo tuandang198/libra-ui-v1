@@ -74,6 +74,7 @@ export default function Chat(props: { apiKeyApp: string }) {
     { color: 'gray.500' },
     { color: 'whiteAlpha.600' },
   );
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     if (conversationId) {
@@ -90,13 +91,7 @@ export default function Chat(props: { apiKeyApp: string }) {
   }, [messages]);
 
   const scrollToBottom = () => {
-    if (containerRef.current) {
-      window.scroll({
-        top: document.body.offsetHeight,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleTranslate = async () => {
@@ -130,7 +125,6 @@ export default function Chat(props: { apiKeyApp: string }) {
     setMessages(newMessages);
     setOutputCode(' ');
     setLoading(true);
-    console.log(messages, 'dddddd');
 
     // -------------- Fetch --------------
     const message: ChatRequest = {
@@ -152,19 +146,6 @@ export default function Chat(props: { apiKeyApp: string }) {
             ),
           } as ChatGPTMessage,
         ]);
-        console.log(
-          [
-            ...newMessages,
-            {
-              role: 'assistant',
-              content: formatMarkdown(
-                res.data.result.message.content,
-                res.data.result.message.references,
-              ),
-            } as ChatGPTMessage,
-          ],
-          'pppppppppp',
-        );
 
         if (!conversationId) {
           setConversationId(res.data.result.message.conversationId);
@@ -248,6 +229,14 @@ export default function Chat(props: { apiKeyApp: string }) {
 
   const handleChange = (Event: any) => {
     setInputCode(Event.target.value);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.stopPropagation();
+      handleTranslate();
+    }
   };
 
   return (
@@ -375,6 +364,7 @@ export default function Chat(props: { apiKeyApp: string }) {
             _placeholder={placeholderColor}
             placeholder="Câu hỏi của bạn..."
             onChange={handleChange}
+            onKeyDown={onKeyDown}
           />
           <Button
             variant="primary"
@@ -398,6 +388,7 @@ export default function Chat(props: { apiKeyApp: string }) {
           >
             Gửi
           </Button>
+          <div ref={messagesEndRef} />
         </Flex>
       </Flex>
     </Flex>
