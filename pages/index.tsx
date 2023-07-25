@@ -269,7 +269,7 @@ export default function Chat(props: { apiKeyApp: string }) {
         ></Flex>
         {/* Main Box */}
         {messages?.map(({ content, role }, index) => (
-          <Flex direction="column" w="100%" mx="auto" mb={'20px'}>
+          <Flex direction="column" w="100%" mx="auto" mb={'20px'} key={index}>
             {role == 'user' ? (
               <Flex w="100%" align={'center'} mb="10px">
                 <Flex
@@ -319,7 +319,7 @@ export default function Chat(props: { apiKeyApp: string }) {
               </Flex>
             ) : null}
             {role == 'assistant' ? (
-              <Flex w="100%">
+              <Flex w="100%" key={index}>
                 <Flex
                   borderRadius="full"
                   justify="center"

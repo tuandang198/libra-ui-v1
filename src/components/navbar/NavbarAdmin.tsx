@@ -133,7 +133,7 @@ export default function AdminNavbar(props: {
           </Link>
           <Breadcrumb>
             <BreadcrumbItem color={secondaryText} fontSize="m">
-              <BreadcrumbLink color={secondaryText}>
+              <BreadcrumbLink color={secondaryText} cursor={'default'}>
                 AI hỗ trợ tra cứu các văn bản pháp luật
               </BreadcrumbLink>
             </BreadcrumbItem>

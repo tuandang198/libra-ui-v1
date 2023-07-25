@@ -19,6 +19,7 @@ import {
   Input,
   Stack,
   Text,
+  useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -31,6 +32,7 @@ export default function Login() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
   const router = useRouter();
+  const inputColor = useColorModeValue('navy.700', 'white');
 
   const handleSubmit = async (Event: any) => {
     Event.preventDefault();
@@ -84,7 +86,7 @@ export default function Login() {
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel>Username</FormLabel>
-                  <Input id="username" name="username" />
+                  <Input id="username" name="username" color={inputColor}/>
                 </FormControl>
 
                 <PasswordField ref={passwordRef} />
