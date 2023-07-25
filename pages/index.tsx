@@ -57,18 +57,10 @@ export default function Chat(props: { apiKeyApp: string }) {
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
   const inputColor = useColorModeValue('navy.700', 'white');
-  const iconColor = useColorModeValue('brand.500', 'white');
-  const bgIcon = useColorModeValue(
-    'linear-gradient(180deg, #FBFBFF 0%, #CACAFF 100%)',
-    'whiteAlpha.200',
-  );
+  
   const brandColor = useColorModeValue('brand.500', 'white');
-  const buttonBg = useColorModeValue('white', 'whiteAlpha.100');
   const gray = useColorModeValue('gray.500', 'white');
-  const buttonShadow = useColorModeValue(
-    '14px 27px 45px rgba(112, 144, 176, 0.2)',
-    'none',
-  );
+  
   const textColor = useColorModeValue('navy.700', 'white');
   const placeholderColor = useColorModeValue(
     { color: 'gray.500' },
@@ -155,74 +147,6 @@ export default function Chat(props: { apiKeyApp: string }) {
         alert('Something went wrong went fetching from the API.');
         return;
       });
-
-    setLoading(false);
-  };
-
-  const sendMessage = async () => {
-    const apiKey = token;
-    setInputOnSubmit(inputCode);
-
-    // Chat post conditions(maximum number of characters, valid message etc.)
-
-    if (!apiKey) {
-      alert('Please sign in.');
-      return;
-    }
-
-    if (!inputCode) {
-      alert('Please enter your message.');
-      return;
-    }
-
-    setOutputCode(' ');
-    setLoading(true);
-    const controller = new AbortController();
-    const body: ChatBody = {
-      inputCode,
-      model,
-      apiKey,
-    };
-
-    // -------------- Fetch --------------
-    const response = await fetch('/api/chatAPI', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      signal: controller.signal,
-      body: JSON.stringify(body),
-    });
-
-    if (!response.ok) {
-      setLoading(false);
-      if (response) {
-        alert(
-          'Something went wrong went fetching from the API. Make sure to use a valid API key.',
-        );
-      }
-      return;
-    }
-
-    const data = response.body;
-
-    if (!data) {
-      setLoading(false);
-      alert('Something went wrong');
-      return;
-    }
-
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
-
-    while (!done) {
-      setLoading(true);
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setOutputCode((prevCode) => prevCode + chunkValue);
-    }
 
     setLoading(false);
   };

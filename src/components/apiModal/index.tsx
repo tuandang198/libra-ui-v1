@@ -4,8 +4,7 @@ import { Button, useToast } from '@chakra-ui/react';
 import { useContext } from 'react';
 
 function APIModal(props: { setApiKey: any; sidebar?: boolean }) {
-  const { setApiKey, sidebar } = props;
-  const toast = useToast();
+  const { sidebar } = props;
   //   @ts-ignore
   const { setConversationId } = useContext(MessageContext);
 

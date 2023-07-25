@@ -1,12 +1,10 @@
 'use client';
-import { BASE_URL, LOGIN } from '@/common/constants/api-const';
-import { OAuthButtonGroup } from '@/components/authentication/OAuthButtonGroup';
+
 import { PasswordField } from '@/components/authentication/PasswordField';
 import { Logo } from '@/components/icons/Icons';
 /*eslint-disable*/
 
 import Link from '@/components/link/Link';
-import { BaseResponse, LoginResponse } from '@/types/types';
 import {
   Box,
   Button,
@@ -22,9 +20,8 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { login } from './api/authAPI';
 
 export default function Login() {
@@ -45,8 +42,6 @@ export default function Login() {
     await login(data)
       .then((res) => {
         localStorage.setItem('access_token', res.result.access_token);
-		// console.log(res.timestamp.toString());
-		
         localStorage.setItem('exp', res.timestamp.toString());
         router.push('/');
       })
@@ -86,7 +81,7 @@ export default function Login() {
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel>Username</FormLabel>
-                  <Input id="username" name="username" color={inputColor}/>
+                  <Input id="username" name="username" color={inputColor} />
                 </FormControl>
 
                 <PasswordField ref={passwordRef} />
@@ -107,14 +102,6 @@ export default function Login() {
                     Don't have an account? Sign up
                   </Link>
                 </Text>
-                {/* <HStack>
-                <Divider />
-                <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
-                  or continue with
-                </Text>
-                <Divider />
-              </HStack>
-              <OAuthButtonGroup /> */}
               </Stack>
             </form>
           </Stack>

@@ -3,25 +3,13 @@
 
 // chakra imports
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Badge,
   Box,
   Flex,
   HStack,
   Text,
-  List,
   Icon,
-  ListItem,
   useColorModeValue,
-  Link,
-  Button,
 } from '@chakra-ui/react';
-import { FaCircle } from 'react-icons/fa';
-import { IoMdAdd } from 'react-icons/io';
 import NavLink from '@/components/link/NavLink';
 import { IRoute } from '@/types/navigation';
 import {
@@ -38,7 +26,6 @@ import {
   AllChatHistoryResponse,
   BaseResponse,
   MessageResponse,
-  UserResponse,
 } from '@/types/types';
 import { axiosInstance } from '../../../../pages/api/authAPI';
 import { MessageContext } from '@/contexts/MessageContext';
@@ -51,16 +38,9 @@ interface SidebarLinksProps extends PropsWithChildren {
 export function SidebarLinks(props: SidebarLinksProps) {
   //   Chakra color mode
   const pathname = usePathname();
-  let activeColor = useColorModeValue('navy.700', 'white');
-  let inactiveColor = useColorModeValue('gray.500', 'gray.500');
-  let borderColor = useColorModeValue('gray.200', 'whiteAlpha.300');
-  let activeIcon = useColorModeValue('brand.500', 'white');
-  let iconColor = useColorModeValue('navy.700', 'white');
-  let gray = useColorModeValue('gray.500', 'gray.500');
   const [chatHistory, setChatHistory] = useState<MessageResponse[]>([]);
   // @ts-ignore
-  const { conversationId, setConversationId, getChatHistoryById } =
-    useContext(MessageContext);
+  const { conversationId, setConversationId } = useContext(MessageContext);
 
   const { routes } = props;
 
@@ -152,11 +132,7 @@ export function SidebarLinks(props: SidebarLinksProps) {
     });
   };
 
-  return (
-    <>
-      {createLinks(routes)}
-    </>
-  );
+  return <>{createLinks(routes)}</>;
 }
 
 export default SidebarLinks;

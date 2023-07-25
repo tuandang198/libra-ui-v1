@@ -61,15 +61,7 @@ export default function HeaderLinks(props: {
     '14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
     '0px 41px 75px #081132',
   );
-  const buttonBg = useColorModeValue('transparent', 'navy.800');
-  const hoverButton = useColorModeValue(
-    { bg: 'gray.100' },
-    { bg: 'whiteAlpha.100' },
-  );
-  const activeButton = useColorModeValue(
-    { bg: 'gray.200' },
-    { bg: 'whiteAlpha.200' },
-  );
+  
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('access_token');
@@ -89,25 +81,13 @@ export default function HeaderLinks(props: {
       borderRadius="30px"
       boxShadow={shadow}
     >
-      {/* <SearchBar
-        mb={() => {
-          if (secondary) {
-            return { base: '10px', md: 'unset' };
-          }
-          return 'unset';
-        }}
-        me="10px"
-        borderRadius="30px"
-      /> */}
 
-      {/* responsive */}
       <SidebarResponsive routes={routes} />
 
       {/* sidebar link */}
       <APIModal setApiKey={setApiKey} />
 
       <Button
-        //   onClick={onOpen}
         minW="max-content !important"
         p="0px"
         me="10px"
@@ -119,7 +99,6 @@ export default function HeaderLinks(props: {
         {!localStorage.getItem('access_token') ? (
           <Link href="/sign-in">
             Sign in/ Sign up
-            {/* <Icon w="18px" h="18px" as={MdLock} color={navbarIcon} /> */}
           </Link>
         ) : (
           <Menu>
