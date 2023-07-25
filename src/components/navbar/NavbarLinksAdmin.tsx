@@ -6,7 +6,6 @@ import {
   Center,
   Flex,
   Icon,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -27,6 +26,7 @@ import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../../pages/api/authAPI';
 import { ME } from '@/common/constants/api-const';
 import { BaseResponse, UserResponse } from '@/types/types';
+import Link from 'next/link';
 
 export default function HeaderLinks(props: {
   secondary: boolean;
@@ -97,7 +97,7 @@ export default function HeaderLinks(props: {
         bg="none !important"
       >
         {!localStorage.getItem('access_token') ? (
-          <Link href="/sign-in">
+          <Link href="sign-in">
             Sign in/ Sign up
           </Link>
         ) : (

@@ -57,10 +57,10 @@ export default function Chat(props: { apiKeyApp: string }) {
   // const [apiKey, setApiKey] = useState<string>(apiKeyApp);
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.200');
   const inputColor = useColorModeValue('navy.700', 'white');
-  
+
   const brandColor = useColorModeValue('brand.500', 'white');
   const gray = useColorModeValue('gray.500', 'white');
-  
+
   const textColor = useColorModeValue('navy.700', 'white');
   const placeholderColor = useColorModeValue(
     { color: 'gray.500' },
@@ -115,7 +115,8 @@ export default function Chat(props: { apiKeyApp: string }) {
     // ];
 
     setMessages(newMessages);
-    setOutputCode(' ');
+	setOutputCode(' ');
+    setInputCode('');
     setLoading(true);
 
     // -------------- Fetch --------------
@@ -289,6 +290,7 @@ export default function Chat(props: { apiKeyApp: string }) {
             placeholder="Câu hỏi của bạn..."
             onChange={handleChange}
             onKeyDown={onKeyDown}
+			value={inputCode}
           />
           <Button
             variant="primary"

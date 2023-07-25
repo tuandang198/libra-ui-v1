@@ -43,7 +43,7 @@ export default function Login() {
       .then((res) => {
         localStorage.setItem('access_token', res.result.access_token);
         localStorage.setItem('exp', res.timestamp.toString());
-        router.push('/');
+		window.location.href = "/"
       })
       .catch((error) => {
         console.error('An error occurred:', error);
@@ -97,7 +97,7 @@ export default function Login() {
                   Sign in
                 </Button>
                 <Text color="fg.muted">
-                  <Link href="/sign-up" color="fg.muted">
+                  <Link href="sign-up" color="fg.muted">
                     {' '}
                     Don't have an account? Sign up
                   </Link>
