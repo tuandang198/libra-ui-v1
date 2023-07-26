@@ -20,7 +20,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { signUp } from './api/authAPI';
 
 export default function Login() {
@@ -28,6 +28,13 @@ export default function Login() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const inputColor = useColorModeValue('navy.700', 'white');
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      window.location.href = '/';
+    }
+  }, []);
 
   const handleSubmit = async (Event: any) => {
     Event.preventDefault();
@@ -73,11 +80,16 @@ export default function Login() {
               <Stack spacing="5">
                 <FormControl>
                   <FormLabel htmlFor="email">Email</FormLabel>
-                  <Input id="email" type="email" name="email" color={inputColor}/>
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    color={inputColor}
+                  />
                 </FormControl>
                 <FormControl>
                   <FormLabel>Username</FormLabel>
-                  <Input id="username" name="username" color={inputColor}/>
+                  <Input id="username" name="username" color={inputColor} />
                 </FormControl>
                 <PasswordField ref={passwordRef} />
               </Stack>

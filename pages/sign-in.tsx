@@ -21,7 +21,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { login } from './api/authAPI';
 
 export default function Login() {
@@ -30,6 +30,13 @@ export default function Login() {
   const toast = useToast();
   const router = useRouter();
   const inputColor = useColorModeValue('navy.700', 'white');
+
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      window.location.href = '/';
+    }
+  }, []);
 
   const handleSubmit = async (Event: any) => {
     Event.preventDefault();
@@ -43,7 +50,7 @@ export default function Login() {
       .then((res) => {
         localStorage.setItem('access_token', res.result.access_token);
         localStorage.setItem('exp', res.timestamp.toString());
-		window.location.href = "/"
+        window.location.href = '/';
       })
       .catch((error) => {
         console.error('An error occurred:', error);
