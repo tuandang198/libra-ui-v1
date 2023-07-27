@@ -107,7 +107,6 @@ export default function Chat(props: { apiKeyApp: string }) {
       ...messages,
       { role: 'user', content: inputCode },
     ] as ChatGPTMessage[];
-    console.log(messages, 'messages');
 
     // [
     //   ...messages,
