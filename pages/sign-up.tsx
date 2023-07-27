@@ -100,7 +100,9 @@ export default function Login() {
               </Stack>
 
               <Stack spacing="6">
-                <Button variant="primary" type="submit">Sign up</Button>
+                <Button variant="primary" type="submit">
+                  Sign up
+                </Button>
                 <HStack>
                   <Divider />
                   <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
