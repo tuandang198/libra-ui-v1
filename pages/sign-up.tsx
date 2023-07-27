@@ -46,11 +46,16 @@ export default function Login() {
     };
 
     await signUp(data)
-      .then((res) => {
+      .then(() => {
         router.push('/sign-in');
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        console.error('An error occurred:', error);
+        if (error.response) {
+          alert(error.response.data.message);
+          return;
+        }
+        alert(error.message);
       });
   };
 
@@ -95,7 +100,7 @@ export default function Login() {
               </Stack>
 
               <Stack spacing="6">
-                <Button variant="primary">Sign up</Button>
+                <Button variant="primary" type="submit">Sign up</Button>
                 <HStack>
                   <Divider />
                   <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
