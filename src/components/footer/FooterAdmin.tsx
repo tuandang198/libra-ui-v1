@@ -1,11 +1,7 @@
 'use client';
 /*eslint-disable*/
 
-import {
-  Flex,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 export default function Footer() {
   const textColor = useColorModeValue('gray.500', 'white');
@@ -33,7 +29,7 @@ export default function Footer() {
       >
         {' '}
         <Text as="span" fontWeight="500" ms="4px">
-          Made with love in Hanoi - {new Date().getFullYear()}
+          Made with <span color='red'>❤️</span> in Hanoi - {new Date().getFullYear()}
         </Text>
       </Text>
     </Flex>
