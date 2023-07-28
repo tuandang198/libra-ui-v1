@@ -231,14 +231,6 @@ export default function Chat(props: { apiKeyApp: string }) {
                   >
                     {content}
                   </Text>
-                  <Icon
-                    cursor="pointer"
-                    as={MdEdit}
-                    ms="auto"
-                    width="20px"
-                    height="20px"
-                    color={gray}
-                  />
                 </Flex>
               </Flex>
             ) : null}

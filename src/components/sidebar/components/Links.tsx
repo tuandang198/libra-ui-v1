@@ -2,16 +2,17 @@
 /* eslint-disable */
 
 // chakra imports
-import {
-  Box,
-  Flex,
-  HStack,
-  Text,
-  Icon,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { CONVERSATIONS_ALL } from '@/common/constants/api-const';
 import NavLink from '@/components/link/NavLink';
+import { MessageContext } from '@/contexts/MessageContext';
 import { IRoute } from '@/types/navigation';
+import {
+  AllChatHistoryResponse,
+  BaseResponse,
+  MessageResponse,
+} from '@/types/types';
+import { Box, Flex, HStack, Icon, Text } from '@chakra-ui/react';
+import { usePathname } from 'next/navigation';
 import {
   PropsWithChildren,
   useCallback,
@@ -19,16 +20,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { usePathname } from 'next/navigation';
 import { MdMessage } from 'react-icons/md';
-import { CONVERSATIONS_ALL, ME } from '@/common/constants/api-const';
-import {
-  AllChatHistoryResponse,
-  BaseResponse,
-  MessageResponse,
-} from '@/types/types';
 import { axiosInstance } from '../../../../pages/api/authAPI';
-import { MessageContext } from '@/contexts/MessageContext';
 // import { MessageContext } from '@/contexts/ChatContext';
 
 interface SidebarLinksProps extends PropsWithChildren {
@@ -63,7 +56,6 @@ export function SidebarLinks(props: SidebarLinksProps) {
           })
           .then((res) => {
             const chatHistory: AllChatHistoryResponse = res.data.result;
-            console.log(chatHistory);
 
             setChatHistory(chatHistory.conversations);
           });
@@ -88,19 +80,17 @@ export function SidebarLinks(props: SidebarLinksProps) {
               maxW="100%"
               ps="17px"
               mb="0px"
+              key={key}
             >
               <HStack w="100%" mb="14px" spacing={'26px'}>
                 (
                 <NavLink
-                  //   href={route.layout ? route.layout + route.path : route.path}
                   href={''}
-                  key={key}
                   styles={{ width: '100%' }}
                 >
                   <Flex
                     w="100%"
                     alignItems="center"
-                    justifyContent="center"
                     onClick={() => {
                       setConversationId(chat.id);
                     }}
@@ -115,11 +105,18 @@ export function SidebarLinks(props: SidebarLinksProps) {
                     </Box>
                     <Text
                       me="auto"
-                      fontWeight="500"
+                      css={
+                        conversationId === chat.id
+                          ? 'text-decoration: underline;font-weight:900;'
+                          : 'font-weight:500;'
+                      }
                       letterSpacing="0px"
                       fontSize="sm"
+                      whiteSpace={'nowrap'}
+                      textOverflow={'ellipsis'}
+                      overflow="hidden"
                     >
-                      {chat.id}
+                      {chat.title}
                     </Text>
                   </Flex>
                 </NavLink>

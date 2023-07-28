@@ -6,6 +6,10 @@ import { Logo } from '@/components/icons/Icons';
 
 import Link from '@/components/link/Link';
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Button,
   Checkbox,
@@ -68,6 +72,10 @@ export default function Login() {
       py={{ base: '12', md: '24' }}
       px={{ base: '0', sm: '8' }}
     >
+      {/* <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>Your browser is outdated!</AlertTitle>
+      </Alert> */}
       <Stack spacing="8">
         <Stack spacing="6">
           <Logo />
@@ -103,6 +111,7 @@ export default function Login() {
                 <Button variant="primary" type="submit">
                   Sign in
                 </Button>
+
                 <Text color="fg.muted">
                   <Link href="sign-up" color="fg.muted">
                     {' '}
